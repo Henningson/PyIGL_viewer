@@ -14,5 +14,5 @@ void main()
     vec3 color = ambientLighting;
     color += dot_normal * lightIntensity;
     color *= albedo;
-    outputColor = vec4(color, 1.0f);
+    outputColor = vec4(color*2.0f, 1.0f);
 }

@@ -21,21 +21,22 @@ class Viewer(QMainWindow):
     close_signal = pyqtSignal()
     screenshot_signal = pyqtSignal(str)
     legend_signal = pyqtSignal(list, list)
+    load_shader_signal = pyqtSignal()
 
     def __init__(self):
         super().__init__()
         self.viewer_palette = {
-            "viewer_background": "#7f7f9b",
+            "viewer_background": "#252526",
             "viewer_widget_border_color": "#555555",
-            "menu_background": "#bbbbbf",
-            "ui_element_background": "#cccccc",
+            "menu_background": "#333333",
+            "ui_element_background": "#3e3e3e",
             "ui_group_border_color": "#777777",
+            "font_color": "#ccccbd"
         }
 
         self.setAutoFillBackground(True)
         self.setStyleSheet(
-            f"background-color: {self.viewer_palette['viewer_background']}"
-        )
+            f"background-color: {self.viewer_palette['viewer_background']}; color: {self.viewer_palette['font_color']};")
 
         self.main_layout = QGridLayout()
         self.main_layout.setHorizontalSpacing(2)
@@ -63,6 +64,7 @@ class Viewer(QMainWindow):
 
         self.screenshot_signal.connect(self.save_screenshot_)
         self.legend_signal.connect(self.add_ui_legend_)
+        self.load_shader_signal.connect(self.reload_shaders_)
 
     def add_viewer_widget(self, x, y, row_span=1, column_span=1):
         group_layout = QVBoxLayout()
@@ -203,3 +205,8 @@ class Viewer(QMainWindow):
 
     def save_screenshot(self, path):
         self.screenshot_signal.emit(path)
+
+
+    def reload_shaders_(self):
+        a = 1
+        #for self.get_viewer_widget(0).mesh_groups

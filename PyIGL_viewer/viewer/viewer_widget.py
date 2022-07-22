@@ -44,7 +44,7 @@ class ViewerWidget(QOpenGLWidget):
         self.global_uniforms["linkLight"] = False
 
         self.line_width = 1
-        self.point_size = 3
+        self.point_size = 5
 
         # Available shaders
         self.shaders = {}
@@ -193,9 +193,7 @@ class ViewerWidget(QOpenGLWidget):
                 core.bind_buffers()
                 prefab.bind_vertex_attributes()
                 prefab.bind_uniforms()
-                gl.glDrawArrays(
-                    core.drawing_mode, 0, core.element_size * core.number_elements
-                )
+                gl.glDrawArrays(core.drawing_mode, core.element_size * core.offset, core.element_size * core.number_elements)
         self.process_post_draw_events()
 
     def resizeGL(self, width, height):
@@ -485,7 +483,7 @@ class ViewerWidget(QOpenGLWidget):
     ):
         if not "vertexColor" in vertex_attributes:
             vertex_attributes["vertexColor"] = np.tile(
-                np.array([0.8, 0.2, 0.2], dtype=np.float32), (points.shape[0], 1)
+                np.array([1.0, 1.0, 1.0], dtype=np.float32), (points.shape[0], 1)
             )
         faces = np.linspace(
             0, points.shape[0], num=points.shape[0], endpoint=False, dtype=np.int32

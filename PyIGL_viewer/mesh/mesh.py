@@ -15,9 +15,10 @@ class GlMeshCoreId:
         self.core_id = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f') + str(uuid.uuid4())
 
 class GlMeshCore:
-    def __init__(self, vertices, faces):
+    def __init__(self, vertices, faces, offset=0):
         self.number_vertices = vertices.shape[0]
         self.number_elements = faces.shape[0]
+        self.offset = offset
 
         self.element_size = faces.shape[1]
         if self.element_size == 1:

@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication
 from PyIGL_viewer import Viewer
 
 script_folder = os.path.dirname(__file__)
-path_to_obj_file = os.path.join(script_folder, "assets", "cube.obj")
+path_to_obj_file = os.path.join(script_folder, "assets", "beetle.obj")
 # Path to your OBJ file stored in path_to_obj_file
 vertices, faces = igl.read_triangle_mesh(path_to_obj_file)
 
